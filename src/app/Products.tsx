@@ -35,7 +35,7 @@ function Products() {
     return (
         <div className="px-60 grid grid-cols-4 gap-6 mb-10">
             {products.map((product) => (
-                <Link href={`./product/${product.id}`} className="bg-white border border-gray-300 cursor-pointer hover:border-blue-500 hover:text-blue-500 transition-colors duration-150" key={product.id}>
+                <Link href={`/product/${product.id}`} className="bg-white border border-gray-300 cursor-pointer hover:border-blue-500 hover:text-blue-500 transition-colors duration-150" key={product.id}>
                     <div className="relative overflow-hidden">
                         <img src={product.image.url} alt={product.image.alt} className="w-full border-b border-gray-300 h-70 object-cover hover:scale-105 transition-transform duration-150" />
                         {product.discountedPrice < product.price ? (

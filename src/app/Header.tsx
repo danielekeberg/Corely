@@ -7,8 +7,8 @@ function Header() {
                 <h1 className="text-2xl font-bold cursor-pointer hover:text-blue-500 transition-colors duration-150">CORELY</h1>
             </Link>
             <div className="gap-10 flex">
-                <Link href="./" className="text-lg hover:text-blue-500 transition-colors duration-150">Products</Link>
-                <Link href="./contact" className="text-lg hover:text-blue-500 transition-colors duration-150">Contact</Link>
+                <Link href="../" className="text-lg hover:text-blue-500 transition-colors duration-150">Products</Link>
+                <Link href="../contact" className="text-lg hover:text-blue-500 transition-colors duration-150">Contact</Link>
             </div>
             <Link href="./cart">
                 <img src="/icons/cart.svg" alt="Cart Icon" className="w-8 h-8 cursor-pointer" />

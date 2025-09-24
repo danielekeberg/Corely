@@ -1,5 +1,6 @@
 'use client';
 
+import Header from "../../Header";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -24,6 +25,8 @@ function App() {
 
     return (
         <div>
+            <Header />
+            <div>
             product id: {id}
             {product && (
                 <div>
@@ -33,6 +36,7 @@ function App() {
                     <p>Price: ${product.price}</p>
                 </div>
             )}
+        </div>
         </div>
     );
 }
