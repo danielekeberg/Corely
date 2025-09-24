@@ -3,30 +3,30 @@
 import { useState } from "react";
 
 function Contact() {
-    const [showToast, setShowToast] = useState(false);
-    const [isError, setIsError] = useState(false);
+    // const [showToast, setShowToast] = useState(false);
+    // const [isError, setIsError] = useState(false);
 
-    const toast = (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name').value;
+    // const toast = (e) => {
+    //     e.preventDefault();
+    //     const name = document.getElementById('name').value;
 
-        if(name.length < 3) {
-            setShowToast(false);
-            setIsError(true);
-            setTimeout(() => setIsError(false), 2500);
-            document.getElementById=('nameDiv').classList.add('border', 'border-red-500');  // Får error her pga classList.
+    //     if(name.length < 3) {
+    //         setShowToast(false);
+    //         setIsError(true);
+    //         setTimeout(() => setIsError(false), 2500);
+    //         document.getElementById=('nameDiv').classList.add('border', 'border-red-500');  // Får error her pga classList.
             
-            return;
-        }
-        document.getElementById('name').value = '';
-        document.getElementById('subject').value = '';
-        document.getElementById('email').value = '';
-        document.getElementById('msg').value = '';
+    //         return;
+    //     }
+    //     document.getElementById('name').value = '';
+    //     document.getElementById('subject').value = '';
+    //     document.getElementById('email').value = '';
+    //     document.getElementById('msg').value = '';
 
-        setShowToast(true);
-        setTimeout(() => setShowToast(false), 2500);
+    //     setShowToast(true);
+    //     setTimeout(() => setShowToast(false), 2500);
         
-    }
+    // }
     return (
         <div className="flex justify-center gap-5">
             <div className="w-75">
@@ -74,8 +74,8 @@ function Contact() {
                         <textarea className="p-2 border border-gray-500 resize-none h-20" type="text" id="msg" />
                     </div>
                 </form>
-                <button onClick={toast} className="bg-blue-500 w-full mt-5 cursor-pointer text-white p-2 hover:bg-blue-600 transition-colors duration-150" type="submit">Send Message</button>
-                {showToast && (
+                <button className="bg-blue-500 w-full mt-5 cursor-pointer text-white p-2 hover:bg-blue-600 transition-colors duration-150" type="submit">Send Message</button>
+                {/* {showToast && (
                     <div className="fixed bottom-5 right-5 bg-blue-500 text-white px-4 py-2 rounded shadow-lg">
                         <h5>Message Sent</h5>
                         <p>Thank you for reaching out to us!</p>
@@ -86,7 +86,7 @@ function Contact() {
                         <h5>Validation Error</h5>
                         <p>Please fix the errors in the form</p>
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     )
