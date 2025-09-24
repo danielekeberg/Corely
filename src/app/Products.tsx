@@ -6,7 +6,7 @@ import Link from "next/link";
 function Products() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function getData() {
@@ -20,7 +20,7 @@ function Products() {
                 console.log(data);
             } catch (error) {
                 setLoading(true);
-                setError(error);
+                setError(true);
             } finally { 
                 setLoading(false);
             }
