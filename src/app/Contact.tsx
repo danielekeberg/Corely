@@ -45,7 +45,7 @@ function Contact() {
                     </div>
                     <div className="flex flex-col" id="msgDiv">
                         <label htmlFor="msg">Message</label>
-                        <textarea className="p-2 border border-gray-500 resize-none h-20" type="text" id="msg" />
+                        <textarea className="p-2 border border-gray-500 resize-none h-20" id="msg" />
                     </div>
                 </form>
                 <button className="bg-blue-500 w-full mt-5 cursor-pointer text-white p-2 hover:bg-blue-600 transition-colors duration-150" type="submit">Send Message</button>
