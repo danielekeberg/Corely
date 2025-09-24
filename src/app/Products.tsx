@@ -30,7 +30,7 @@ function Products() {
     }, []);
 
     if(loading) return <p>Loading...</p>;
-    if(error) return <p>Error: {error.message}</p>;
+    if(error) return <p>Error..</p>;
 
     return (
         <div className="px-60 grid grid-cols-4 gap-6 mb-10">
