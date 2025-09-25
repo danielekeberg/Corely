@@ -3,8 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+type Product = {
+    id: string | number;
+    title: string;
+    price: number;
+    discountedPrice: number;
+    rating: number;
+    image: {
+        url: string;
+        alt: string;
+    };
+    description: string;
+}
+
 function Products() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 

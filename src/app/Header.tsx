@@ -10,7 +10,7 @@ function Header() {
                 <Link href="../" className="text-lg hover:text-blue-500 transition-colors duration-150">Products</Link>
                 <Link href="../contact" className="text-lg hover:text-blue-500 transition-colors duration-150">Contact</Link>
             </div>
-            <Link href="./cart">
+            <Link href="../cart">
                 <img src="/icons/cart.svg" alt="Cart Icon" className="w-8 h-8 cursor-pointer" />
             </Link>
         </div>
