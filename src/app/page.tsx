@@ -1,8 +1,8 @@
 import './globals.css'
-import Header from './Header.tsx';
-import Section from './Section.tsx';
-import SearchAndSort from './SearchAndSort.tsx';
-import Products from './Products.tsx';
+import Header from './Header';
+import Section from './Section';
+import SearchAndSort from './SearchAndSort';
+import Products from './Products';
 
 function App() {
 
