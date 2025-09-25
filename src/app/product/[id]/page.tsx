@@ -67,7 +67,7 @@ function App() {
                                         <h1 className="font-bold text-blue-500 text-3xl">${product.discountedPrice}</h1>
                                         <span className="line-through text-gray-400 text-xl">${product.price}</span>
                                     </div>
-                                    <span className="text-green-700 font-semibold">You save ${product.price - product.discountedPrice}</span>
+                                    <span className="text-green-700 font-semibold">You save ${(product.price - product.discountedPrice).toFixed(2)}</span>
                                 </div>
                                 :
                                 <h1>${product.price}</h1>
