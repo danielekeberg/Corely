@@ -23,6 +23,7 @@ function App() {
     const params = useParams();
     const { id } = params;
     const [product, setProduct] = useState<Product | null>(null);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         async function fetchProduct() {
@@ -40,6 +41,9 @@ function App() {
 
         fetchProduct();
     }, [id]);
+
+    const incrementQuantity = () => setQuantity(prev => prev + 1);
+    const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
 
     return (
         <div>
@@ -89,11 +93,15 @@ function App() {
                         </div>
                         <div className="mt-6">
                             <h3 className="text-md font-semibold">Quantity</h3>
-                            <div className="flex items-center gap-4 mt-2">
-                                <input id="quantity" type="number" min="1" defaultValue="1" className="w-20 border border-gray-300 rounded px-2 py-1" />
+                            <div className="w-25 flex justify-between gap-5">
+                                <button className="cursor-pointer w-10 font-bold text-2xl" onClick={decrementQuantity}>-</button>
+                                <div className="border border-gray-400 rounded text-center px-10">
+                                    <span className="text-center">{quantity}</span>
+                                </div>
+                                <button className="cursor-pointer w-10 font-bold text-2xl" onClick={incrementQuantity}>+</button>
                             </div>
                         </div>
-                        <button className="bg-blue-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150">Add to Cart - ${product.discountedPrice}</button>
+                        <button className="bg-blue-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150">Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}</button>
                     </div>
                 </div>
             )}
