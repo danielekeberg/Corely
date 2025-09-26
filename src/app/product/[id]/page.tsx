@@ -52,11 +52,13 @@ function App() {
             <div className="px-60 mb-10">
             {product && (
                 <div className="flex gap-6">
-                    <div className="w-1/2 relative">
-                        <img src={product.image.url} alt={product.image.alt} className="w-full h-120 object-cover border border-gray-300" />
-                        {product.discountedPrice < product.price ? (
+                    <div className="w-1/2 flex justify-center items-center">
+                        <div className="relative">
+                            <img src={product.image.url} alt={product.image.alt} className="w-120 border border-gray-500 rounded" />
+                            {product.discountedPrice < product.price ? (
                             <span className="absolute top-2 left-2 bg-red-500 text-white text-xl font-bold px-2 py-1 rounded">{((product.price - product.discountedPrice) / product.price * 100).toFixed(0)}%</span>
                         ) : null}
+                        </div>
                     </div>
                     <div className="w-1/2">
                         <h1 className="text-4xl font-bold">{product.title}</h1>
@@ -94,18 +96,22 @@ function App() {
                         <div className="mt-6">
                             <h3 className="text-md font-semibold">Quantity</h3>
                             <div className="w-25 flex justify-between gap-5">
-                                <button className="cursor-pointer w-10 font-bold text-2xl" onClick={decrementQuantity}>-</button>
-                                <div className="border border-gray-400 rounded text-center px-10">
-                                    <span className="text-center">{quantity}</span>
+                                <button className="cursor-pointer bg-gray-200 px-4 font-bold text-2xl border border-gray-400 rounded hover:bg-gray-300" onClick={decrementQuantity}>-</button>
+                                <div className="border border-gray-400 rounded px-10 h-10 flex justify-center items-center overflow-hidden">
+                                    <span className="text-center align-middle">{quantity}</span>
                                 </div>
-                                <button className="cursor-pointer w-10 font-bold text-2xl" onClick={incrementQuantity}>+</button>
+                                <button className="cursor-pointer bg-gray-200 px-4 font-bold text-2xl border border-gray-400 rounded hover:bg-gray-300" onClick={incrementQuantity}>+</button>
                             </div>
                         </div>
-                        <button className="bg-blue-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150">Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}</button>
+                        <button
+                            className="bg-blue-500 border border-gray-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150"
+                            onClick={() => alert(`Added ${quantity} of ${product.title} to cart.`)}>
+                            Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}
+                        </button>
                     </div>
                 </div>
             )}
-        </div>
+            </div>
         </div>
     );
 }
