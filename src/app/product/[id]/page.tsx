@@ -4,6 +4,8 @@ import Header from "../../Header";
 import Back from "../../Back";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useCart } from "../../useCart";
+import Toast from "../../Toast";
 
 type Product = {
     id: string | number;
@@ -24,6 +26,7 @@ function App() {
     const { id } = params;
     const [product, setProduct] = useState<Product | null>(null);
     const [quantity, setQuantity] = useState(1);
+    const { cart, addToCart } = useCart();
 
     useEffect(() => {
         async function fetchProduct() {
@@ -41,6 +44,15 @@ function App() {
 
         fetchProduct();
     }, [id]);
+
+    const [show, setShowToast] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowToast(false)
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
@@ -105,9 +117,14 @@ function App() {
                         </div>
                         <button
                             className="bg-blue-500 border border-gray-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150"
-                            onClick={() => alert(`Added ${quantity} of ${product.title} to cart.`)}>
-                            Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}
+                            onClick={() => {
+                                addToCart({ id: product.id, quantity});
+                                setShowToast(true);}}>
+                                Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}
                         </button>
+                        { show && (
+                            <Toast type="success" message="Item added to cart!" />
+                        )}
                     </div>
                 </div>
             )}
