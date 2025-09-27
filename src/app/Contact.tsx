@@ -1,9 +1,20 @@
 'use client';
 
+import { useState, useEffect } from "react";
+import Toast from "./Toast";
+
 function Contact() {
+    const [show, setShowToast] = useState(false);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowToast(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div className="flex justify-center gap-5">
-            <div className="w-75">
+            <div className="w-125">
                 <h1 className="text-2xl font-bold mb-3">Get in Touch</h1>
                 <div className="flex gap-3 mb-4">
                     <img className="h-10" src="/icons/mail.svg"></img>
@@ -29,27 +40,29 @@ function Contact() {
                     </div>
                 </div>
             </div>
-            <div className="w-75">
+            <div className="w-100">
                 <form className="flex flex-col gap-4">
                     <div className="flex flex-col" id="nameDiv">
                         <label htmlFor="name">Full Name</label>
-                        <input className="p-2 border border-gray-500" type="text" id="name" />
+                        <input className="p-2 border border-gray-400" type="text" id="name" />
                     </div>
                     <div className="flex flex-col" id="subjectDiv">
                         <label htmlFor="subject">Subject</label>
-                        <input className="p-2 border border-gray-500" type="text" id="subject" />
+                        <input className="p-2 border border-gray-400" type="text" id="subject" />
                     </div>
                     <div className="flex flex-col" id="emailDiv">
                         <label htmlFor="email">Email</label>
-                        <input className="p-2 border border-gray-500" type="text" id="email" />
+                        <input className="p-2 border border-gray-400" type="text" id="email" />
                     </div>
                     <div className="flex flex-col" id="msgDiv">
                         <label htmlFor="msg">Message</label>
-                        <textarea className="p-2 border border-gray-500 resize-none h-20" id="msg" />
+                        <textarea className="p-2 border border-gray-400 resize-none h-20" id="msg" />
                     </div>
                 </form>
-                <button className="bg-blue-500 w-full mt-5 cursor-pointer text-white p-2 hover:bg-blue-600 transition-colors duration-150" type="submit">Send Message</button>
-                
+                <button onClick={() => setShowToast(true)} className="bg-blue-500 w-full mt-5 cursor-pointer text-white p-2 hover:bg-blue-600 transition-colors duration-150" type="submit">Send Message</button>
+                { show && (
+                    <Toast type="success" message="Message sent successfully!" />
+                )}
             </div>
         </div>
     )
