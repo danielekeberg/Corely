@@ -86,13 +86,15 @@ function Products() {
                         placeholder="Search products..."
                         className="w-full p-2 border border-gray-300 bg-white text-sm px-9 rounded"
                     />
-                    { query && (
-                        <p className="mt-1 text-xs text-gray-500">
-                            {displayedProducts.length} result{displayedProducts.length !== 1 ? "s" : ""} for "{query}"
-                        </p>
-                    )}
                     <img src="/icons/search.svg" alt="Search Icon" className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2" />
                 </div>
+                { query && (
+                    <div className="w-full justify-center align-text-bottom">
+                        <p className="mt-1 text-xs text-gray-500 text-center items-center">
+                            {displayedProducts.length} result{displayedProducts.length !== 1 ? "s" : ""} for "{query}"
+                        </p>
+                    </div>
+                    )}
                 <div className="py-4 flex items-center gap-4">
                     <select 
                         id="sort"

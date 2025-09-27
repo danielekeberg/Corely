@@ -118,7 +118,7 @@ function App() {
                         <button
                             className="bg-blue-500 border border-gray-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150"
                             onClick={() => {
-                                addToCart({ id: product.id, quantity});
+                                addToCart({ id: product.id, quantity });
                                 setShowToast(true);}}>
                                 Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}
                         </button>

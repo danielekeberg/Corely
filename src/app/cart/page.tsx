@@ -69,7 +69,7 @@ function App() {
                                         <img src={item.image.url} alt={item.image.alt} className="w-20 h-20 object-cover" />
                                     </div>
                                     <div className="col-span-2">
-                                        <Link href={`../product/${item.id}`} className="font-semibold">{item.title}</Link>
+                                        <Link href={`../product/${item.id}`} className="font-semibold hover:underline">{item.title}</Link>
                                         <p className="text-gray-500 text-sm">{item.description}</p>
                                         <button 
                                             className="text-red-600 text-sm mt-2 hover:underline cursor-pointer"
