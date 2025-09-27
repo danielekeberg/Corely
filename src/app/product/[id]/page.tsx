@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "../../useCart";
 import Toast from "../../Toast";
+import { useCartContext } from "../../CartContext";
 
 type Product = {
     id: string | number;
@@ -26,7 +27,8 @@ function App() {
     const { id } = params;
     const [product, setProduct] = useState<Product | null>(null);
     const [quantity, setQuantity] = useState(1);
-    const { cart, addToCart } = useCart();
+    // const { cart, addToCart } = useCart();
+    const { addToCart } = useCartContext();
 
     useEffect(() => {
         async function fetchProduct() {
