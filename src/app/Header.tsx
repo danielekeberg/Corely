@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { useCart } from "./useCart";
-import { useCartContext } from "./CartContext";
 
 function Header() {
-    // const { cart } = useCart();
-    // const cartQuantity = cart.length;
-    const { cart } = useCartContext();
+    const { cart } = useCart();
+    const cartQuantity = cart.length;
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
     return (
         <div className="flex p-4 border-b border-gray-300 items-center justify-between px-60 py-6">
@@ -20,8 +18,8 @@ function Header() {
             </div>
             <Link href="../cart" className="relative">
                 <img src="/icons/cart.svg" alt="Cart Icon" className="w-8 h-8 cursor-pointer" />
-                { totalItems > 0 && (
-                    <span className="absolute top-0 right-0 translate-x-3 -translate-y-3 bg-red-600 rounded-full px-2 text-white text-sm py-0.5">{totalItems}</span>
+                { cartQuantity > 0 && (
+                    <span className="absolute top-0 right-0 translate-x-3 -translate-y-3 bg-red-600 rounded-full px-2 text-white text-sm py-0.5">{cartQuantity}</span>
                 )}
             </Link>
         </div>
