@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "../../useCart";
 import Toast from "../../Toast";
-import { useCartContext } from "../../CartContext";
 
 type Product = {
     id: string | number;
@@ -27,8 +26,8 @@ function App() {
     const { id } = params;
     const [product, setProduct] = useState<Product | null>(null);
     const [quantity, setQuantity] = useState(1);
-    // const { cart, addToCart } = useCart();
-    const { addToCart } = useCartContext();
+    const { addToCart } = useCart();
+    const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
 
     useEffect(() => {
         async function fetchProduct() {
@@ -37,24 +36,20 @@ function App() {
             });
             const data = await res.json();
             const prod = data.data;
-            console.log(prod);
             setProduct(prod);
-            console.log(product)
-
-            
         }
-
         fetchProduct();
     }, [id]);
 
-    const [show, setShowToast] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowToast(false)
-        }, 3000);
-        return () => clearTimeout(timer);
-    }, []);
+    async function handleToast() {
+        try {
+            if (product) {
+                setToast({ type: "success", msg: `${product.title} added to cart.`});
+            }
+        } catch {
+            setToast({ type: "error", msg: "Something went wrong. Please try again."})
+        }
+    }
 
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
@@ -62,6 +57,13 @@ function App() {
     return (
         <div>
             <Header />
+            { toast && (
+                <Toast 
+                    type={toast.type}
+                    message={toast.msg}
+                    onClose={() => setToast(null)}
+                />
+            )}
             <Back />
             <div className="px-60 mb-10">
             {product && (
@@ -121,11 +123,15 @@ function App() {
                             className="bg-blue-500 border border-gray-500 text-white w-full cursor-pointer font-bold mt-6 px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-150"
                             onClick={() => {
                                 addToCart({ id: product.id, quantity });
-                                setShowToast(true);}}>
+                                handleToast()}}>
                                 Add to Cart - ${(product.discountedPrice * quantity).toFixed(2)}
                         </button>
-                        { show && (
-                            <Toast type="success" message="Item added to cart!" />
+                        { toast && (
+                            <Toast 
+                                type={toast.type}
+                                message={toast.msg}
+                                onClose={() => setToast(null)}
+                            />
                         )}
                     </div>
                 </div>
