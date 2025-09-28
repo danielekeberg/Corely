@@ -1,27 +1,30 @@
 'use client';
 
-interface ToastProps {
+import { useEffect } from "react";
+
+function Toast({
+    type,
+    message,
+    onClose,
+    duration = 3000,
+}: {
     type: "success" | "error";
     message: string;
-}
+    onClose: () => void;
+    duration?: number;
+}) {
+    useEffect(() => {
+        const t = setTimeout(onClose, duration);
+        return () => clearTimeout(t);
+    }, [duration, onClose]);
 
-function Toast({ type, message }: ToastProps) {
-    let bgColor;
-
-    switch(type) {
-        case "success":
-            bgColor = "bg-blue-500";
-            break;
-        case "error":
-            bgColor = "bg-red-500";
-            break;
-        default:
-            bgColor = "bg-gray-500";
-    }
     return (
-        <div className={`fixed bottom-5 right-5 p-4 rounded shadow-lg text-white ${bgColor}`}>
-            {message}
+        <div
+            role="status"
+            className={`fixed bottom-5 right-5 <-50 px-4 py-3 rounded shadow-lg text-white transition-opacity duration-300 ${type === "success" ? "bg-blue-500" : "bg-red-500"}`}>
+                {message}
         </div>
     )
 }
+
 export default Toast;
