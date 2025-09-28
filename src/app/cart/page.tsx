@@ -8,10 +8,10 @@ import { useEffect, useState } from "react";
 import Toast from "../Toast";
 
 function App() {
-    const { cart, removeFromCart } = useCart();
+    const { cart, removeFromCart, increment, decrement } = useCart();
     const checkCart = cart.length;
     const [cartItems, setCartItems] = useState(cart);
-    const [show, setShowToast] = useState(false);
+    const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
 
     useEffect(() => {
         async function fetchCartItems() {
@@ -28,19 +28,23 @@ function App() {
     }, [cart]);
     const total = cartItems.reduce((sum, item) => sum + (item.discountedPrice * item.quantity), 0);
 
-    useEffect(() => {
-        if(!show) return;
-        const timer = setTimeout(() => {
-            setShowToast(false)
-        }, 3000);
-        return () => clearTimeout(timer);
-    }, [show]);
+    async function handleToast() {
+        try {
+            setToast({ type: "success", msg: "Item removed from cart."})
+        } catch {
+            setToast({ type: "error", msg: "Something went wrong. Please try again."})
+        }
+    }
 
     return (
         <div>
             <Header />
-            { show && (
-                <Toast type="success" message="Item removed from cart" />
+            { toast && (
+                <Toast
+                    type={toast.type}
+                    message={toast.msg}
+                    onClose={() => setToast(null)
+                    }/>
             )}
             { checkCart === 0 ?(
                 <div>
@@ -75,13 +79,27 @@ function App() {
                                             className="text-red-600 text-sm mt-2 hover:underline cursor-pointer"
                                             onClick={() => {
                                                 removeFromCart(item.id);
-                                                setShowToast(true);
+                                                handleToast();
                                             }}>
                                             Remove
                                         </button>
                                     </div>
-                                    <div className="border border-gray-400 w-1/3 rounded px-2 h-10 flex justify-center items-center overflow-hidden">
-                                        <span className="text-center align-middle">{item.quantity}</span>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => decrement(item.id)}
+                                            className="border border-gray-400 w-1/5 rounded px-2 h-7 flex justify-center items-center overflow-hidden cursor-pointer hover:bg-gray-200"
+                                        >
+                                        -
+                                        </button>
+                                        <div className="border border-gray-400 w-1/5 rounded px-2 h-7 flex justify-center items-center overflow-hidden">
+                                            <span className="text-center align-middle">{item.quantity}</span>
+                                        </div>
+                                        <button
+                                            onClick={() => increment(item.id)}
+                                            className="border border-gray-400 w-1/5 rounded px-2 h-7 flex justify-center items-center overflow-hidden cursor-pointer hover:bg-gray-200"
+                                        >
+                                        +
+                                        </button>
                                     </div>
                                     <div className="font-semibold">${(item.discountedPrice * item.quantity).toFixed(2)}</div>
                                 </div>
