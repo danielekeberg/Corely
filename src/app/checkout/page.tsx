@@ -6,9 +6,21 @@ import Toast from "../Toast";
 import { useState, useEffect } from "react";
 
 function App() {
+    const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
+
+    useEffect(() => {
+        setToast({ type: "success", msg: `Order completed successfully!`});
+    }, []);
     return (
         <div>
             <Header />
+            {toast && (
+                <Toast
+                    type={toast.type}
+                    message={toast.msg}
+                    onClose={() => setToast(null)}
+                />
+            )}
             <div className="flex flex-col items-center justify-center text-center px-60 py-10 gap-6">
                 <img src="/icons/checkout.svg" alt="Checkout" className="h-15 w-full" />
                 <h1 className="text-3xl font-bold">Order Confirmed!</h1>
