@@ -2,11 +2,23 @@
 
 import Link from "next/link";
 import { useCart } from "./useCart";
+import { useState, useEffect } from "react";
 
 function Header() {
     const { cart } = useCart();
     const cartQuantity = cart.length;
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    
+    const [qty, setQty] = useState(0);
+
+    useEffect(() => {
+        setQty(cartQuantity)
+    }, [cartQuantity]);
+
+    useEffect(() => {
+        console.log(qty)
+    }, [qty])
+
     return (
         <div className="flex p-4 border-b border-gray-300 items-center justify-between px-60 py-6">
             <Link href="../">
@@ -19,7 +31,7 @@ function Header() {
             <Link href="../cart" className="relative">
                 <img src="/icons/cart.svg" alt="Cart Icon" className="w-8 h-8 cursor-pointer" />
                 { cartQuantity > 0 && (
-                    <span className="absolute top-0 right-0 translate-x-3 -translate-y-3 bg-red-600 rounded-full px-2 text-white text-sm py-0.5">{cartQuantity}</span>
+                    <span className="absolute top-0 right-0 translate-x-3 -translate-y-3 bg-red-600 rounded-full px-2 text-white text-sm py-0.5">{qty}</span>
                 )}
             </Link>
         </div>
