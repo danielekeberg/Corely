@@ -7,17 +7,11 @@ import { useState, useEffect } from "react";
 function Header() {
     const { cart } = useCart();
     const cartQuantity = cart.length;
-
-    
     const [qty, setQty] = useState(0);
 
     useEffect(() => {
         setQty(cartQuantity)
     }, [cartQuantity]);
-
-    useEffect(() => {
-        console.log(qty)
-    }, [qty])
 
     return (
         <div className="flex p-4 border-b border-gray-300 items-center justify-between px-60 py-6">
