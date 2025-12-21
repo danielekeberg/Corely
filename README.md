@@ -3,7 +3,7 @@
 Corely is a fully functional **online shop** built with modern web technologies.
 It commects to a REST API to display products, supports a full **shopping cart system**, and delivers an immersive e-commerce experience.
 
----
+![Corely](https://i.ibb.co/BHrBKCDQ/image-4.jpg)
 
 ## Features
 
@@ -13,6 +13,12 @@ It commects to a REST API to display products, supports a full **shopping cart s
 - Order summary with subtotal and total
 
 ---
+
+## Technologies Used
+
+- Next.js
+- React
+- Tailwind CSS
 
 ## Getting Started
 
@@ -35,3 +41,12 @@ npm install
 npm run dev
 ```
 The app will be available at http://localhost:3000
+
+## Project Information
+
+This project was created as a part of a previous school assignment and is no longer under active development.
+
+---
+
+# Author
+Daniel Lehre Ekeberg
